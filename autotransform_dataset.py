@@ -33,7 +33,7 @@ for ind in range(0,len(Xd['X'])):
 
 del Xd
 
-data_file = h5py.File('dataset/RML2018_selected_data.hdf5', 'w')
+data_file = h5py.File('dataset/autotransform_data.hdf5', 'w')
 data_file.create_dataset('data', data=data)
 data_file.create_dataset('mod_label', data=np.array(mod_label))
 data_file.create_dataset('snr_label', data=np.array(snr_label))
