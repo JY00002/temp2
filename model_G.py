@@ -78,10 +78,8 @@ X=[]
 Y=[]
 lbl=[]
 
-    
-X = np.transpose(data, (0, 2, 1))
-
-X=X.reshape((X.shape[0]*t,X.shape[1]//t,X.shape[2]))
+X=np.reshape(data,(data.shape[0]*t,data.shape[1]//t,data.shape[2]))    
+X = np.transpose(X, (0, 2, 1))
 
 for ind in range(0, X.shape[0]):
     mod_index = np.argmax(mod_label[ind])
