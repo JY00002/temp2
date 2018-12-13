@@ -71,7 +71,7 @@ data=Xd['data']
 mod_label1=Xd['mod_label']
 snr_label1=Xd['snr_label']
 
-mod_label=np.repeat(mod_label1,t)
+mod_label=np.repeat(mod_label1,t,axis=0)
 snr_label=np.repeat(snr_label1,t)
 
 X=[]
