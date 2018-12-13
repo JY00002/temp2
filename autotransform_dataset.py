@@ -28,13 +28,13 @@ for ind in range(0,len(Xd['X'])):
         temp1=np.split(temp,(1024/frame_length),axis=0)
         data=np.concatenate((data,temp1),axis=0)
         for i in range(0,(1024/frame_length)):
-        mod_label.append(Xd['Y'][ind])
-        snr_label.append(Xd['Z'][ind])
+                 mod_label.append(Xd['Y'][ind])
+                 snr_label.append(Xd['Z'][ind])
 
 del Xd
 
 data_file = h5py.File('dataset/RML2018_selected_data.hdf5', 'w')
-data_file.create_dataset('data', data=np.array(data))
+data_file.create_dataset('data', data=data)
 data_file.create_dataset('mod_label', data=np.array(mod_label))
 data_file.create_dataset('snr_label', data=np.array(snr_label))
 
