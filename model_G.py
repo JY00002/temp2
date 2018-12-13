@@ -61,21 +61,29 @@ for i in range(0,len(mods)):
     itemindex = mods_total.index(mods[i])
     mod_map[itemindex] = i
 
-
+framelength=64
+t=1024//framelength
 
 file_name = 'dataset/autotransform_data.hdf5'
 Xd = h5py.File(file_name, 'r')
 
 data=Xd['data']
-mod_label=Xd['mod_label']
-snr_label=Xd['snr_label']
+mod_label1=Xd['mod_label']
+snr_label1=Xd['snr_label']
+
+mod_label=np.repeat(mod_label1,t)
+snr_label=np.repeat(snr_label1,t)
 
 X=[]
 Y=[]
 lbl=[]
 
+    
+X = np.transpose(data, (0, 2, 1))
 
-for ind in range(0, data.shape[0]):
+X=X.reshape((X.shape[0]*t,X.shape[1]//t,X.shape[2]))
+
+for ind in range(0, X.shape[0]):
     mod_index = np.argmax(mod_label[ind])
     mod = mods_total[mod_index]
     snr = snr_label[ind]
@@ -83,8 +91,6 @@ for ind in range(0, data.shape[0]):
     lbl.append((mod,snr))
     Y.append(mod_map[mod_index]*len(snrs) + snr_index)
     
-    
-X = np.transpose(data, (0, 2, 1))
 del data, mod_label, snr_label
 
 #X1=np.transpose(X)
