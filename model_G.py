@@ -61,7 +61,7 @@ for i in range(0,len(mods)):
     itemindex = mods_total.index(mods[i])
     mod_map[itemindex] = i
 
-framelength=64
+framelength=256
 t=1024//framelength
 
 file_name = 'dataset/RML2018_selected_data.hdf5'
@@ -156,7 +156,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.summary()
 
 nb_epoch = 200     # number of epochs to train on
-batch_size = 1024  # training batch size
+batch_size = 256  # training batch size
 
 print('----------------------Model Set Beginning Training----------------------')
 
