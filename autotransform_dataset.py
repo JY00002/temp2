@@ -27,7 +27,7 @@ for ind in range(0,len(Xd['X'])):
         temp=np.array(Xd['X'][ind])
         temp1=np.split(temp,(1024/frame_length),axis=0)
         data=np.concatenate((data,temp1),axis=0)
-        for i in range(0,(1024/frame_length)):
+        for i in range(0,(1024//frame_length)):
                  mod_label.append(Xd['Y'][ind])
                  snr_label.append(Xd['Z'][ind])
 
