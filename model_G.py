@@ -125,20 +125,20 @@ model.add(Reshape((in_shp+[1]), input_shape=in_shp))
 model.add(Flatten())
 model.add(Dense((in_shp[1]^2), activation='relu', name='dense2', kernel_initializer='he_normal'))
 model.add(Dropout(dr))
-model.add(Reshape((in_shp[1],in_shp[1],1)))
-model.add(Conv2D(128, (2, 5), activation='relu', name='conv1', padding='same', kernel_initializer='glorot_uniform', input_shape=in_shp))
+model.add(Reshape((2*in_shp[1],2*in_shp[1],1)))
+model.add(Conv2D(128, (8, 8), activation='relu', name='conv1', padding='same', kernel_initializer='glorot_uniform', input_shape=in_shp))
 model.add(Dropout(dr))
-model.add(AveragePooling2D(pool_size=(1, 4), strides=None, padding='valid', data_format=None))
-model.add(Conv2D(128, (2, 5), activation='relu', name='conv2', padding='same', kernel_initializer='glorot_uniform'))
+#model.add(AveragePooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None))
+model.add(Conv2D(128, (4, 4), activation='relu', name='conv2', padding='same', kernel_initializer='glorot_uniform'))
 model.add(Dropout(dr))
-model.add(AveragePooling2D(pool_size=(1, 4), strides=None, padding='valid', data_format=None))
-model.add(Conv2D(128, (2, 5), activation='relu', name='conv3', padding='same', kernel_initializer='glorot_uniform'))
+#model.add(AveragePooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None))
+model.add(Conv2D(128, (4, 4), activation='relu', name='conv3', padding='same', kernel_initializer='glorot_uniform'))
 model.add(Dropout(dr))
-model.add(AveragePooling2D(pool_size=(1, 2), strides=None, padding='valid', data_format=None))
-model.add(Conv2D(128, (2, 5), activation='relu', name='conv4', padding='same', kernel_initializer='glorot_uniform'))
+#model.add(AveragePooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None))
+model.add(Conv2D(128, (4, 4), activation='relu', name='conv4', padding='same', kernel_initializer='glorot_uniform'))
 model.add(Dropout(dr))
-model.add(AveragePooling2D(pool_size=(1, 2), strides=None, padding='valid', data_format=None))
-model.add(Conv2D(128, (2, 7), activation='relu', name='conv5', padding='same', kernel_initializer='glorot_uniform'))
+#model.add(AveragePooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None))
+model.add(Conv2D(128, (4, 4), activation='relu', name='conv5', padding='same', kernel_initializer='glorot_uniform'))
 model.add(Dropout(dr))
 model.add(Flatten())
 model.add(Dense(256, activation='relu', name='dense1', kernel_initializer='he_normal'))
@@ -151,11 +151,11 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.summary()
 
 nb_epoch = 200     # number of epochs to train on
-batch_size = 512  # training batch size
+batch_size = 1024  # training batch size
 
 print('----------------------Model Set Beginning Training----------------------')
 
-filepath = 'trained_weights/Model_E_wts_data_dost.h5'
+filepath = 'trained_weights/Model_G_wts_data_dost.h5'
 
 history = model.fit(X_train,
     Y_train,
