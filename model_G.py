@@ -63,7 +63,7 @@ for i in range(0,len(mods)):
 
 
 
-file_name = 'dataset/RML2018_selected_data.hdf5'
+file_name = 'dataset/autotransform_data.hdf5'
 Xd = h5py.File(file_name, 'r')
 
 data=Xd['data']
@@ -87,15 +87,15 @@ for ind in range(0, data.shape[0]):
 X = np.transpose(data, (0, 2, 1))
 del data, mod_label, snr_label
 
-X1=np.transpose(X)
-X1=dost(X1)
-X1=np.absolute(X1)
-X1=np.transpose(X1)
-X=X[...,np.newaxis]
-X1=X1[...,np.newaxis]
-X=np.concatenate((X,X1),axis=3)
+#X1=np.transpose(X)
+#X1=dost(X1)
+#X1=np.absolute(X1)
+#X1=np.transpose(X1)
+#X=X[...,np.newaxis]
+#X1=X1[...,np.newaxis]
+#X=np.concatenate((X,X1),axis=3)
+#del X1
 
-del X1
 print(X.shape)
 
 
@@ -121,7 +121,11 @@ classes = Y_train.shape[1]
 
 dr = 0.5 # dropout rate (%)
 model = models.Sequential()
-#model.add(Reshape((in_shp+[1]), input_shape=in_shp))
+model.add(Reshape((in_shp+[1]), input_shape=in_shp))
+model.add(Flatten())
+model.add(Dense((in_shp[1]^2), activation='relu', name='dense2', kernel_initializer='he_normal'))
+model.add(Dropout(dr))
+model.add(Reshape((in_shp[1],in_shp[1],1)))
 model.add(Conv2D(128, (2, 5), activation='relu', name='conv1', padding='same', kernel_initializer='glorot_uniform', input_shape=in_shp))
 model.add(Dropout(dr))
 model.add(AveragePooling2D(pool_size=(1, 4), strides=None, padding='valid', data_format=None))
